@@ -10,13 +10,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class Main extends Application {
+    private ProcessCopyRecall recall;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("File Processor v2.0");
+
+        //File Chooser
+        File desktop = javax.swing.filechooser.FileSystemView.getFileSystemView().getHomeDirectory();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(desktop);
 
         //Title
         Text title = new Text("File Processor");
@@ -42,7 +51,6 @@ public class Main extends Application {
         TextField textUrl = new TextField();
         textUrl.setPromptText("Paste Url");
         textUrl.setPrefWidth(600);
-        textUrl.setEditable(false);
 
         //Grid Pane
         GridPane gridPane = new GridPane();
@@ -67,6 +75,29 @@ public class Main extends Application {
         Scene scene = new Scene(gridPane, 600, 275);
         scene.getStylesheets().add("com/pl/main.css");
         primaryStage.setScene(scene);
+
+        //Action
+        openButton.setOnAction(
+                event -> {
+                    RadioButton chk = (RadioButton)processGroup.getSelectedToggle();
+                    String selectedRadio = chk.getId();
+                    // TODO:pl - do something when button is pressed
+                    if (selectedRadio.equalsIgnoreCase("toc-url")) {
+                        System.out.println("selected: "+chk.getText());
+                    } else {
+                        File file = fileChooser.showOpenDialog(primaryStage);
+                        if (file != null) {
+                            if (selectedRadio.equalsIgnoreCase("cr-file")) {
+                                recall = new ProcessCopyRecall(file);
+                                recall.generateCopyRecallVars();
+                            } else if (selectedRadio.equalsIgnoreCase("toc-file")) {
+                                System.out.println("selected: "+chk.getText());
+                            }
+                        }
+                    }
+                }
+        );
+
 
         primaryStage.show();
     }
