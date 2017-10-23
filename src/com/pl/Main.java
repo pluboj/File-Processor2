@@ -17,6 +17,7 @@ import java.io.File;
 
 public class Main extends Application {
     private ProcessCopyRecall recall;
+    private ProcessToC tocVars;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -60,7 +61,7 @@ public class Main extends Application {
         gridPane.setPadding(new Insets(25, 25, 25, 25));
 
         //Button
-        Button openButton = new Button("Open Resource File");
+        Button openButton = new Button("Open/Process Resource File");
         openButton.setId("chooser-button");
 
         //Add elements to gridPane
@@ -81,8 +82,9 @@ public class Main extends Application {
                 event -> {
                     RadioButton chk = (RadioButton)processGroup.getSelectedToggle();
                     String selectedRadio = chk.getId();
-                    // TODO:pl - do something when button is pressed
+
                     if (selectedRadio.equalsIgnoreCase("toc-url")) {
+                        // TODO:pl - do something when button is pressed
                         System.out.println("selected: "+chk.getText());
                     } else {
                         File file = fileChooser.showOpenDialog(primaryStage);
@@ -91,7 +93,8 @@ public class Main extends Application {
                                 recall = new ProcessCopyRecall(file);
                                 recall.generateCopyRecallVars();
                             } else if (selectedRadio.equalsIgnoreCase("toc-file")) {
-                                System.out.println("selected: "+chk.getText());
+                                tocVars = new ProcessToC(file);
+                                tocVars.generateToCVars();
                             }
                         }
                     }
