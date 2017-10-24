@@ -18,6 +18,7 @@ import java.io.File;
 public class Main extends Application {
     private ProcessCopyRecall recall;
     private ProcessToC tocVars;
+    private ProcessToCUrl tocUrlLink;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -84,8 +85,11 @@ public class Main extends Application {
                     String selectedRadio = chk.getId();
 
                     if (selectedRadio.equalsIgnoreCase("toc-url")) {
-                        // TODO:pl - do something when button is pressed
-                        System.out.println("selected: "+chk.getText());
+                        String stringUrl = textUrl.getText();
+                        if (stringUrl != null && !stringUrl.isEmpty()) {
+                            tocUrlLink = new ProcessToCUrl(stringUrl);
+                            tocUrlLink.ProcessToCUrlVars();
+                        }
                     } else {
                         File file = fileChooser.showOpenDialog(primaryStage);
                         if (file != null) {
