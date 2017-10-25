@@ -13,8 +13,6 @@ import java.util.logging.Logger;
 public class ProcessCopyRecall extends FileCreator{
 
     private File file;
-    //TODO:pl nice to have user input for this
-    private final int LINE_BREAK = 10;
 
     public ProcessCopyRecall(File file) {
         this.file = file;
@@ -33,6 +31,8 @@ public class ProcessCopyRecall extends FileCreator{
                     sb.append("\r\n");
                 }
             }
+            int lastComma = sb.lastIndexOf(",");
+            sb.deleteCharAt(lastComma);
             createFile(sb,"COPYRECALL.txt");
         } catch (FileNotFoundException e) {
             Logger.getLogger(ProcessCopyRecall.class.getName()).log(Level.SEVERE, null, e);

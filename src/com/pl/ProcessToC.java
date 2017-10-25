@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 * */
 public class ProcessToC extends FileCreator {
     private File file;
-    private final int LINE_BREAK = 10;
 
     public ProcessToC(File file) {
         this.file = file;

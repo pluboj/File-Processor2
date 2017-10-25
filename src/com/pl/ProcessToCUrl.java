@@ -7,7 +7,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 public class ProcessToCUrl extends FileCreator{
-    private final int LINE_BREAK = 10;
     private String strUrl;
 
     public ProcessToCUrl(String strUrl) {

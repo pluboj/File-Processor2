@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 public abstract class FileCreator {
 
+    protected final int LINE_BREAK = 10;
+
     public void createFile(StringBuilder sb, String fileName) {
         File path = javax.swing.filechooser.FileSystemView.getFileSystemView().getHomeDirectory();
 
