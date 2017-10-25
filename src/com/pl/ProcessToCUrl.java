@@ -54,6 +54,9 @@ public class ProcessToCUrl extends FileCreator{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        int lastComma = sb.lastIndexOf(",");
+        sb.deleteCharAt(lastComma);
+
         return sb;
     }
 

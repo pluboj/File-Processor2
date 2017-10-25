@@ -46,7 +46,9 @@ public class ProcessToC extends FileCreator {
         } catch (IOException e) {
             Logger.getLogger(ProcessToC.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        int lastComma = sb.lastIndexOf(",");
+        sb.deleteCharAt(lastComma);
+        
         return sb;
     }
 }
