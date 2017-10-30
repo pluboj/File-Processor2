@@ -18,6 +18,7 @@ public class Main extends Application {
     private ProcessCopyRecall recall;
     private ProcessToC tocVars;
     private ProcessToCUrl tocUrlLink;
+    private ProcessReinvites re;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -48,10 +49,26 @@ public class Main extends Application {
         tocUrl.setToggleGroup(processGroup);
         tocUrl.setId("toc-url");
 
-        //URL input
+        RadioButton reinvite = new RadioButton("Process Reinvites");
+        reinvite.setToggleGroup(processGroup);
+        reinvite.setId("reinvite");
+
+        //Text input
         TextField textUrl = new TextField();
         textUrl.setPromptText("Paste Url");
         textUrl.setPrefWidth(600);
+
+        TextField reinviteUrl = new TextField();
+        reinviteUrl.setPromptText("Paste Survey Url");
+        reinviteUrl.setPrefWidth(600);
+
+        TextField qid = new TextField();
+        qid.setPromptText("QID");
+        qid.setMaxWidth(200);
+
+        TextField loop = new TextField();
+        loop.setPromptText("mainLoop (e.g. 0, 1, 2)");
+        loop.setMaxWidth(200);
 
         //Grid Pane
         GridPane gridPane = new GridPane();
@@ -70,10 +87,14 @@ public class Main extends Application {
         gridPane.add(tocFile,0,2);
         gridPane.add(tocUrl,0,3);
         gridPane.add(textUrl,0,4);
-        gridPane.add(openButton, 0,6,2,1);
+        gridPane.add(reinvite,0,5);
+        gridPane.add(reinviteUrl,0,6);
+        gridPane.add(qid,0,7);
+        gridPane.add(loop,0,8);
+        gridPane.add(openButton, 0,9,2,1);
 
         //Scene
-        Scene scene = new Scene(gridPane, 600, 275);
+        Scene scene = new Scene(gridPane, 600, 375);
         scene.getStylesheets().add("com/pl/main.css");
         primaryStage.setScene(scene);
 
@@ -98,6 +119,15 @@ public class Main extends Application {
                             } else if (selectedRadio.equalsIgnoreCase("toc-file")) {
                                 tocVars = new ProcessToC(file);
                                 tocVars.generateToCVars();
+                            } else if (selectedRadio.equalsIgnoreCase("reinvite")) {
+                                String reUrl = reinviteUrl.getText();
+                                String questionID = qid.getText();
+                                String loopNumber = loop.getText();
+                                if (reUrl != null && !reUrl.isEmpty()
+                                        && questionID != null && !questionID.isEmpty()
+                                        && loopNumber != null && !loopNumber.isEmpty()) {
+                                    re = new ProcessReinvites(file, reUrl, questionID, loopNumber);
+                                }
                             }
                         }
                     }
