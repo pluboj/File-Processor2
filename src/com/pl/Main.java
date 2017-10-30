@@ -127,6 +127,10 @@ public class Main extends Application {
                                         && questionID != null && !questionID.isEmpty()
                                         && loopNumber != null && !loopNumber.isEmpty()) {
                                     re = new ProcessReinvites(file, reUrl, questionID, loopNumber);
+                                    re.setReinvites();
+                                    reinviteUrl.clear();
+                                    qid.clear();
+                                    loop.clear();
                                 }
                             }
                         }
