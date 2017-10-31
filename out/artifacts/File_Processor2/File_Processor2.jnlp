@@ -8,8 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="File_Processor2.jar" size="10239" download="eager" />
+    <jar href="File_Processor2.jar" size="12284" download="eager" />
+    <jar href="jsoup-1.10.3.jar" size="355356" download="eager" />
   </resources>
-  <jfx:javafx-desc  width="600" height="275" main-class="com.pl.Main"  name="File-Processor2" />
+  <jfx:javafx-desc  width="600" height="375" main-class="com.pl.Main"  name="File-Processor2" />
   <update check="background"/>
 </jnlp>

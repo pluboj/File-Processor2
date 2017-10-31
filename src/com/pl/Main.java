@@ -103,12 +103,12 @@ public class Main extends Application {
                 event -> {
                     RadioButton chk = (RadioButton)processGroup.getSelectedToggle();
                     String selectedRadio = chk.getId();
-
                     if (selectedRadio.equalsIgnoreCase("toc-url")) {
                         String stringUrl = textUrl.getText();
                         if (stringUrl != null && !stringUrl.isEmpty()) {
                             tocUrlLink = new ProcessToCUrl(stringUrl);
                             tocUrlLink.ProcessToCUrlVars();
+                            textUrl.clear();
                         }
                     } else {
                         File file = fileChooser.showOpenDialog(primaryStage);
